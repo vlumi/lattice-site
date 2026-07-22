@@ -1,0 +1,70 @@
+{{ define "main" }}
+  <section class="hero">
+    {{/* Procedural motif, like everything in the game: dots and drawn lines. */}}
+    <svg class="hero-icon" width="128" height="128" viewBox="0 0 128 128" role="img"
+         aria-label="Lattice Five motif: dots joined by lines">
+      <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" opacity="0.75">
+        <line x1="20" y1="64" x2="108" y2="64"/>
+        <line x1="64" y1="20" x2="64" y2="108"/>
+        <line x1="31" y1="31" x2="97" y2="97"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="20" cy="64" r="7"/><circle cx="42" cy="64" r="7"/>
+        <circle cx="64" cy="64" r="7"/><circle cx="86" cy="64" r="7"/>
+        <circle cx="108" cy="64" r="7"/>
+        <circle cx="64" cy="20" r="7"/><circle cx="64" cy="42" r="7"/>
+        <circle cx="64" cy="86" r="7"/><circle cx="64" cy="108" r="7"/>
+        <circle cx="31" cy="31" r="7"/><circle cx="97" cy="97" r="7"/>
+      </g>
+    </svg>
+
+    <h1 class="hero-title">Lattice Five</h1>
+    <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
+    <p class="hero-lede">
+      Place a dot, draw a line through five. Every line must use the dot you
+      just placed, and no segment can be drawn twice — how far can you
+      stretch the position before it runs dry? A pencil-and-paper classic
+      (<em>Morpion Solitaire</em>, a.k.a. <em>Join Five</em>), played since
+      the 1970s, still unsolved.
+    </p>
+    {{ with .Site.Params.appStoreURL }}
+      <a class="btn btn-appstore" href="{{ . }}">Download on the App Store</a>
+    {{ else }}
+      <p class="hero-soon">Coming to the App Store.</p>
+    {{ end }}
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h2>The classic, exactly</h2>
+      <p>The standard 36-dot cross and the touching rule (<strong>5T</strong>),
+      with the disjoint variant (<strong>5D</strong>) and the shorter, fully
+      solved <strong>4T/4D</strong> games one tap away. The human record on
+      the classic position stood for 34 years — the machine record is 178.
+      There's room above your best.</p>
+    </div>
+    <div class="feature">
+      <h2>A new puzzle every day</h2>
+      <p>The <strong>daily challenge</strong> deals everyone the same board —
+      a fresh symmetric starting pattern each date, one attempt, one undo per
+      move. Keep the streak alive.</p>
+    </div>
+    <div class="feature">
+      <h2>Challenge your friends</h2>
+      <p>Every generated board has a short <strong>code</strong> — share it
+      and a friend plays exactly your board. No accounts, no server: the code
+      is the whole challenge.</p>
+    </div>
+    <div class="feature">
+      <h2>Study your games</h2>
+      <p>Every finished game is a <strong>replay</strong>: scrub through it,
+      race your best game's pace as you play, and see the openness curve —
+      where your position peaked, and where it died.</p>
+    </div>
+    <div class="feature">
+      <h2>Yours, on your devices</h2>
+      <p>One free app for iPhone, iPad, and Mac. Scores and replays stay on
+      your device. No ads, no accounts, no tracking — ever.</p>
+    </div>
+  </section>
+{{ end }}

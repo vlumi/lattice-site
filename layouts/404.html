@@ -1,0 +1,38 @@
+{{ define "main" }}
+  <section class="hero">
+    {{/* Two messages: a /c/<code> path is a challenge link opened without the
+         app (or in a browser, which can't play it); anything else is a plain
+         not-found. JS swaps in the challenge copy when the path matches; the
+         not-found copy is the no-JS / non-challenge default. */}}
+    <h1 class="hero-title" id="e-title">Page not found</h1>
+    <p class="hero-lede" id="e-lede">
+      That page isn’t here. It might be a Lattice Five challenge link — those
+      open in the app, not the browser.
+    </p>
+    <p class="hero-code" id="e-code" hidden></p>
+
+    {{ with .Site.Params.appStoreURL }}
+      <a class="btn btn-appstore" href="{{ . }}">Download on the App Store</a>
+    {{ else }}
+      <p class="hero-soon">Coming to the App Store.</p>
+    {{ end }}
+
+    <p class="hero-soon"><a href="/">Back to lattice.misaki.fi</a></p>
+  </section>
+
+  <script>
+    // A /c/<code> URL is a shared challenge. If we're on one, reassure rather
+    // than "not found" — the link is fine, it just needs the app. Show the
+    // code so it can be typed into the app manually (Enter Code…).
+    var m = location.pathname.match(/^\/c\/([0-9A-Za-z-]+)\/?$/);
+    if (m) {
+      document.getElementById("e-title").textContent = "Open this in Lattice Five";
+      document.getElementById("e-lede").textContent =
+        "This is a Lattice Five challenge. Open the link on a device with the " +
+        "app installed — or type the code into the app under Enter Code…";
+      var code = document.getElementById("e-code");
+      code.textContent = m[1].toUpperCase();
+      code.hidden = false;
+    }
+  </script>
+{{ end }}

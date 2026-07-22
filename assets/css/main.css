@@ -1,0 +1,90 @@
+/* Lattice Five — ink on paper, chalk on slate. Monochrome plus one accent,
+   like the game: dots and lines, nothing decorative. */
+
+:root {
+  --paper: #faf8f4;
+  --ink: #1c1b19;
+  --ink-soft: #5c594f;
+  --rule: #e3ddd2;
+  --accent: #c8502e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #23242a;
+    --ink: #ecebe6;
+    --ink-soft: #a5a49c;
+    --rule: #3a3b42;
+    --accent: #e0684a;
+  }
+}
+
+* { box-sizing: border-box; }
+html { font-size: 17px; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-rounded, "SF Pro Rounded", -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+.wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
+
+/* Header / footer */
+.site-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  max-width: 44rem; margin: 0 auto; padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+.brand { text-decoration: none; color: var(--ink); }
+.brand-mark { letter-spacing: 0.18em; color: var(--accent); margin-right: 0.4rem; }
+.brand-name { font-weight: 700; }
+.site-nav a, .site-foot a {
+  color: var(--ink-soft); text-decoration: none; margin-left: 0.9rem;
+}
+.site-nav a:hover, .site-foot a:hover { color: var(--accent); }
+.site-foot {
+  max-width: 44rem; margin: 0 auto; padding: 1.5rem 1.25rem 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+.site-foot nav a:first-child { margin-left: 0; }
+.fine { color: var(--ink-soft); font-size: 0.85rem; }
+
+/* Hero */
+.hero { text-align: center; padding: 3rem 0 2rem; }
+.hero-icon { color: var(--ink); margin-bottom: 0.5rem; }
+.hero-title { font-size: 2.2rem; margin: 0.2rem 0; letter-spacing: 0.01em; }
+.hero-tagline { color: var(--ink-soft); margin: 0.3rem 0 1rem; }
+.hero-lede { text-align: left; max-width: 36rem; margin: 0 auto 1.2rem; }
+.hero-soon { color: var(--ink-soft); }
+.hero-code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 1.8rem; letter-spacing: 0.2em; font-weight: 700;
+  color: var(--accent);
+}
+.btn {
+  display: inline-block; padding: 0.6rem 1.4rem; border-radius: 999px;
+  background: var(--ink); color: var(--paper); text-decoration: none;
+  font-weight: 600;
+}
+.btn:hover { background: var(--accent); }
+
+/* Feature cards */
+.features {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem; padding: 1.5rem 0;
+}
+.feature h2 { font-size: 1.05rem; margin: 0 0 0.3rem; }
+.feature p { margin: 0; color: var(--ink-soft); }
+.feature strong { color: var(--ink); }
+
+/* Prose pages */
+.prose h1 { font-size: 1.7rem; }
+.prose h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+.prose a { color: var(--accent); }
+.prose code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  background: var(--rule); padding: 0.1em 0.35em; border-radius: 4px;
+  font-size: 0.9em;
+}
