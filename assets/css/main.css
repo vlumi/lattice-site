@@ -30,6 +30,10 @@ body {
 
 .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
 
+/* Base link colour — the accent, visible on both paper and slate. More
+   specific rules (nav, footer, brand, buttons) override it. */
+a { color: var(--accent); }
+
 /* Header / footer */
 .site-head {
   display: flex; align-items: baseline; justify-content: space-between;
@@ -82,7 +86,6 @@ body {
 /* Prose pages */
 .prose h1 { font-size: 1.7rem; }
 .prose h2 { font-size: 1.15rem; margin-top: 1.8rem; }
-.prose a { color: var(--accent); }
 .prose code {
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   background: var(--rule); padding: 0.1em 0.35em; border-radius: 4px;
