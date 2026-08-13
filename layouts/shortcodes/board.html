@@ -22,7 +22,6 @@
 {{- $w := add (mul $cols $cell) (mul $pad 2) -}}
 {{- $h := add (mul $rows $cell) (mul $pad 2) -}}
 {{/* Board (x,y) → SVG (px,py); y is flipped since SVG grows downward. */}}
-{{- $offset := cond (ne (.Get "offset") nil) (.Get "offset") "0" -}}
 {{- with .Get "caption" -}}<figure class="board-figure">{{- end -}}
 <svg class="board-diagram" width="{{ $w }}" height="{{ $h }}"
      viewBox="0 0 {{ $w }} {{ $h }}" role="img"
@@ -52,11 +51,7 @@
     {{- $o := split (index $p 0) "," -}}
     {{- $d := split (index $p 1) "," -}}
     {{- $len := sub (int (index $p 2)) 1 -}}
-    {{/* Nudged off-axis so a line collinear with `line` reads as separate
-         rather than continuous — the app fans collinear candidates for the
-         same reason. */}}
     <line class="mark-fresh" stroke-width="3.6" stroke-linecap="round"
-          transform="translate(0, {{ $offset }})"
           x1="{{ add $pad (mul (int (index $o 0)) $cell) }}"
           y1="{{ add $pad (mul (sub (sub $rows 1) (int (index $o 1))) $cell) }}"
           x2="{{ add $pad (mul (add (int (index $o 0)) (mul (int (index $d 0)) $len)) $cell) }}"

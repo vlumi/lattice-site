@@ -29,7 +29,7 @@ slowly closes in on itself.
 
 {{< diagrams >}}
 {{< board cols="11" rows="3" dots="0,1 1,1 2,1 3,1 4,1 5,1 6,1 7,1 8,1"
-   line="0,1 1,0 5" fresh="4,1 1,0 5" offset="7"
+   line="0,1 1,0 5" fresh="4,1 1,0 5"
    label="Two lines meeting at a single shared dot" caption="Allowed — they meet at one dot" >}}
 {{< board cols="11" rows="3" dots="0,1 1,1 2,1 3,1 4,1 5,1 6,1 7,1"
    line="0,1 1,0 5" bad="3,1 1,0 5"
