@@ -1,0 +1,91 @@
+{{/*
+  A board diagram, drawn the way the app draws it: dots, drawn lines, faint
+  pinpoints for the empty lattice. Mirrors LatticeKit's Help/BoardDiagram —
+  same vocabulary, so the site and the app teach the same picture.
+
+  Inline SVG rather than exported images: it scales, follows the light/dark
+  theme through currentColor, needs no build step, and stays diffable.
+
+  Params (board coordinates, y grows UP as in the app):
+    cols, rows   the lattice window, e.g. "11 3"
+    dots         "x,y x,y …"
+    line         "x,y dx,dy len"   a played line
+    fresh        same, drawn in the accent (the move being made)
+    bad          same, drawn dashed red (what you can't do)
+    ring         "x,y"             circled — the new dot
+    label        accessible description (required)
+*/}}
+{{- $cols := int (.Get "cols") -}}
+{{- $rows := int (.Get "rows") -}}
+{{- $cell := 22 -}}
+{{- $pad := 14 -}}
+{{- $w := add (mul $cols $cell) (mul $pad 2) -}}
+{{- $h := add (mul $rows $cell) (mul $pad 2) -}}
+{{/* Board (x,y) → SVG (px,py); y is flipped since SVG grows downward. */}}
+{{- $offset := cond (ne (.Get "offset") nil) (.Get "offset") "0" -}}
+{{- with .Get "caption" -}}<figure class="board-figure">{{- end -}}
+<svg class="board-diagram" width="{{ $w }}" height="{{ $h }}"
+     viewBox="0 0 {{ $w }} {{ $h }}" role="img"
+     aria-label="{{ .Get `label` }}">
+  {{/* The empty lattice, faint — the app's "settled" pinpoints. */}}
+  <g fill="currentColor" opacity="0.18">
+    {{- range $c := seq 0 (sub $cols 1) -}}
+      {{- range $r := seq 0 (sub $rows 1) -}}
+        <circle cx="{{ add $pad (mul $c $cell) }}"
+                cy="{{ add $pad (mul (sub (sub $rows 1) $r) $cell) }}" r="1.5"/>
+      {{- end -}}
+    {{- end -}}
+  </g>
+  {{- with .Get "line" -}}
+    {{- $p := split . " " -}}
+    {{- $o := split (index $p 0) "," -}}
+    {{- $d := split (index $p 1) "," -}}
+    {{- $len := sub (int (index $p 2)) 1 -}}
+    <line stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.75"
+          x1="{{ add $pad (mul (int (index $o 0)) $cell) }}"
+          y1="{{ add $pad (mul (sub (sub $rows 1) (int (index $o 1))) $cell) }}"
+          x2="{{ add $pad (mul (add (int (index $o 0)) (mul (int (index $d 0)) $len)) $cell) }}"
+          y2="{{ add $pad (mul (sub (sub $rows 1) (add (int (index $o 1)) (mul (int (index $d 1)) $len))) $cell) }}"/>
+  {{- end -}}
+  {{- with .Get "fresh" -}}
+    {{- $p := split . " " -}}
+    {{- $o := split (index $p 0) "," -}}
+    {{- $d := split (index $p 1) "," -}}
+    {{- $len := sub (int (index $p 2)) 1 -}}
+    {{/* Nudged off-axis so a line collinear with `line` reads as separate
+         rather than continuous — the app fans collinear candidates for the
+         same reason. */}}
+    <line class="mark-fresh" stroke-width="3.6" stroke-linecap="round"
+          transform="translate(0, {{ $offset }})"
+          x1="{{ add $pad (mul (int (index $o 0)) $cell) }}"
+          y1="{{ add $pad (mul (sub (sub $rows 1) (int (index $o 1))) $cell) }}"
+          x2="{{ add $pad (mul (add (int (index $o 0)) (mul (int (index $d 0)) $len)) $cell) }}"
+          y2="{{ add $pad (mul (sub (sub $rows 1) (add (int (index $o 1)) (mul (int (index $d 1)) $len))) $cell) }}"/>
+  {{- end -}}
+  {{- with .Get "bad" -}}
+    {{- $p := split . " " -}}
+    {{- $o := split (index $p 0) "," -}}
+    {{- $d := split (index $p 1) "," -}}
+    {{- $len := sub (int (index $p 2)) 1 -}}
+    <line class="mark-bad" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"
+          x1="{{ add $pad (mul (int (index $o 0)) $cell) }}"
+          y1="{{ add $pad (mul (sub (sub $rows 1) (int (index $o 1))) $cell) }}"
+          x2="{{ add $pad (mul (add (int (index $o 0)) (mul (int (index $d 0)) $len)) $cell) }}"
+          y2="{{ add $pad (mul (sub (sub $rows 1) (add (int (index $o 1)) (mul (int (index $d 1)) $len))) $cell) }}"/>
+  {{- end -}}
+  {{/* Dots last, so lines pass under them — the app's casing idea. */}}
+  <g fill="currentColor">
+    {{- range $dot := split (.Get "dots") " " -}}
+      {{- $xy := split $dot "," -}}
+      <circle cx="{{ add $pad (mul (int (index $xy 0)) $cell) }}"
+              cy="{{ add $pad (mul (sub (sub $rows 1) (int (index $xy 1))) $cell) }}" r="4.5"/>
+    {{- end -}}
+  </g>
+  {{- with .Get "ring" -}}
+    {{- $xy := split . "," -}}
+    <circle class="mark-fresh" fill="none" stroke-width="2"
+            cx="{{ add $pad (mul (int (index $xy 0)) $cell) }}"
+            cy="{{ add $pad (mul (sub (sub $rows 1) (int (index $xy 1))) $cell) }}" r="8"/>
+  {{- end -}}
+</svg>
+{{- with .Get "caption" -}}<figcaption>{{ . }}</figcaption></figure>{{- end -}}

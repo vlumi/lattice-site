@@ -1,0 +1,5 @@
+{{/* Groups board diagrams into a row that wraps on narrow screens. Exists so
+     content pages need no raw HTML (Goldmark strips it unless `unsafe`).
+     `.Inner` is already-rendered SVG from the inner shortcodes — do NOT
+     markdownify it, or Goldmark strips every tag as raw HTML. */}}
+<div class="diagrams">{{ .Inner }}</div>

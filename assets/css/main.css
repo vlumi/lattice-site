@@ -91,3 +91,22 @@ a { color: var(--accent); }
   background: var(--rule); padding: 0.1em 0.35em; border-radius: 4px;
   font-size: 0.9em;
 }
+
+/* Board diagrams on How to play (see layouts/shortcodes/board.html). The same
+   drawing vocabulary as the app: ink dots, drawn lines, a faint lattice. */
+.board-diagram { color: var(--ink); max-width: 100%; height: auto; }
+/* The app's palette, not the site's: its interactive accent is BLUE and red
+   means "illegal / dead". Reusing the site's terracotta accent made a legal
+   fresh line and a forbidden one the same colour. */
+.board-diagram .mark-fresh { stroke: #2a78d6; }
+.board-diagram .mark-bad { stroke: #c0392b; }
+@media (prefers-color-scheme: dark) {
+  .board-diagram .mark-fresh { stroke: #3987e5; }
+  .board-diagram .mark-bad { stroke: #e8705c; }
+}
+/* Diagrams sit in a row where there's room and stack when there isn't. */
+.diagrams { display: flex; flex-wrap: wrap; gap: 1.4rem; margin: 1.1rem 0; }
+.diagrams figure { margin: 0; }
+.diagrams figcaption {
+  color: var(--ink-soft); font-size: 0.85rem; text-align: center; margin-top: 0.3rem;
+}
