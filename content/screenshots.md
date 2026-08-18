@@ -19,6 +19,7 @@ that track where a game peaked and died.
 ### On iPad
 
 {{< shotgrid >}}
+{{< shot name="mid-game-ipad" caption="The bigger screen fits the whole lattice with room to spare, so a long game never has to be panned around." >}}
 {{< shot name="daily-ipad" caption="The daily challenge: one shared board a day, with your streak in the header." >}}
 {{< shot name="replay-ipad" caption="Scrub any finished game, with the openness curve showing where the position peaked and died." >}}
 {{< shot name="new-game-ipad" caption="Five variants — 5T, 5D, 4T, 4D and 5T+ — plus random and shared seeded boards." >}}
