@@ -110,3 +110,22 @@ a { color: var(--accent); }
 .diagrams figcaption {
   color: var(--ink-soft); font-size: 0.85rem; text-align: center; margin-top: 0.3rem;
 }
+
+/* Screenshots. Portrait phone/tablet shots by default; --wide gives the
+   landscape Mac ones room so they aren't squeezed to phone width. */
+.shot-grid {
+  display: grid; gap: 1.4rem; margin: 1.8rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.shot-grid--wide { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
+.shot { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.shot img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule); border-radius: 12px;
+}
+.shot-placeholder {
+  aspect-ratio: 9 / 16; border: 2px dashed var(--rule); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-soft); font-family: ui-monospace, Menlo, monospace; font-size: 0.8rem;
+}
+.shot figcaption { color: var(--ink-soft); font-size: 0.84rem; line-height: 1.4; }

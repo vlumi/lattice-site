@@ -1,0 +1,24 @@
+{{- /* One app screenshot. The source PNGs are store-resolution (up to
+       2064x2752), so they're resized and re-encoded to WebP at build time —
+       shipping them raw would be several MB for a page of thumbnails.
+       Falls back to a labelled placeholder until the PNG is dropped into
+       /assets/img/shots/. Usage:
+         {{< shot name="mid-game-iphone" caption="A game in progress" >}} */ -}}
+{{- $name := .Get "name" -}}
+{{- $caption := .Get "caption" -}}
+{{- $src := resources.Get (printf "img/shots/%s.png" $name) -}}
+<figure class="shot">
+  {{- with $src }}
+  {{- $small := .Resize "480x webp q82" -}}
+  {{- $large := .Resize "960x webp q82" -}}
+  <img src="{{ $small.RelPermalink }}"
+       srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+       width="{{ $small.Width }}" height="{{ $small.Height }}"
+       alt="{{ $caption }}" loading="lazy" decoding="async">
+  {{- else }}
+  <div class="shot-placeholder" role="img" aria-label="{{ $caption }} (screenshot pending)">
+    <span>{{ $name }}.png</span>
+  </div>
+  {{- end }}
+  <figcaption>{{ $caption }}</figcaption>
+</figure>
