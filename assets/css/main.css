@@ -42,7 +42,9 @@ a { color: var(--accent); }
   border-bottom: 1px solid var(--rule);
 }
 .brand { text-decoration: none; color: var(--ink); }
-.brand-mark { letter-spacing: 0.18em; color: var(--accent); margin-right: 0.4rem; }
+/* The app icon at nav scale — the bolder small variant, since the fine one
+   turns to mush this size. */
+.brand-mark { width: 22px; height: 22px; border-radius: 5px; margin-right: 0.45rem; vertical-align: -0.35rem; }
 .brand-name { font-weight: 700; }
 .site-nav a, .site-foot a {
   color: var(--ink-soft); text-decoration: none; margin-left: 0.9rem;
@@ -57,7 +59,16 @@ a { color: var(--accent); }
 
 /* Hero */
 .hero { text-align: center; padding: 3rem 0 2rem; }
-.hero-icon { color: var(--ink); margin-bottom: 0.5rem; }
+/* The app icon proper, so it reads as the product's mark. It keeps its own
+   light ground in both themes — the same way it looks on a Home Screen —
+   rather than inverting with the page. */
+.hero-icon { margin-bottom: 0.5rem; border-radius: 22%; }
+/* In light mode the icon's own paper ground is the same colour as the page, so
+   without an edge the rounded-square shape vanishes and it reads as a floating
+   dot field rather than an app icon. */
+@media (prefers-color-scheme: light) {
+  .hero-icon, .brand-mark { box-shadow: 0 0 0 1px var(--rule); }
+}
 .hero-title { font-size: 2.2rem; margin: 0.2rem 0; letter-spacing: 0.01em; }
 .hero-tagline { color: var(--ink-soft); margin: 0.3rem 0 1rem; }
 .hero-lede { text-align: left; max-width: 36rem; margin: 0 auto 1.2rem; }

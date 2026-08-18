@@ -12,6 +12,9 @@
 {{ end }}
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+{{/* Safari ignores SVG for the touch icon, so this one is a PNG cut from the
+     app's own 1024px icon. */}}
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#faf8f4">
 
 {{/* Open Graph / social preview */}}
