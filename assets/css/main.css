@@ -78,12 +78,11 @@ a { color: var(--accent); }
   font-size: 1.8rem; letter-spacing: 0.2em; font-weight: 700;
   color: var(--accent);
 }
-.btn {
-  display: inline-block; padding: 0.6rem 1.4rem; border-radius: 999px;
-  background: var(--ink); color: var(--paper); text-decoration: none;
-  font-weight: 600;
-}
-.btn:hover { background: var(--accent); }
+/* Apple's official badge — their guidelines require the supplied artwork
+   rather than a look-alike button. */
+.appstore-badge { display: inline-block; margin: 0.4rem 0; transition: transform 0.08s ease; }
+.appstore-badge img { display: block; height: auto; }
+.appstore-badge:hover { transform: translateY(-1px); }
 
 /* Feature cards */
 .features {
