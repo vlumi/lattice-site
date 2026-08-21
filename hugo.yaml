@@ -10,8 +10,7 @@ disableKinds:
 
 params:
   tagline: "Morpion Solitaire — the classic pen-and-paper puzzle for iPhone, iPad, and Mac."
-  # Filled in once the App Store listing is public.
-  appStoreURL: ""
+  appStoreURL: "https://apps.apple.com/app/id6792997007"
   supportEmail: ""
   githubURL: "https://github.com/vlumi/lattice"
 
